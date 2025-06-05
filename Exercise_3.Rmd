@@ -21,6 +21,41 @@ Disadvantages:
    2) When multiple people work on the same file, errors may occur if they modify the same part.
    
 
+## Exercise 2
+
+Here is the link to my GitHub repository:
+https://github.com/z-x156/exeRcise-sheet-3
+
+
+## Exercise 3
+
+### a)
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(readr)
+library(dplyr)
+
+pixar <- readr::read_csv("D:/Sose 25 Software R 2/Exercise 3/pixar_films.csv")
+
+pixar_clean <- pixar %>% 
+  filter(!is.na(film))
+
+unique(pixar_clean$film_rating)
+pixar_clean <- pixar_clean %>%
+  mutate(film_rating_factor = factor(film_rating))
+
+view(pixar_clean)
+
+```
+Because film_rating is a categorical variable, converting it into a factor allows it to be correctly handled in subsequent visualizations or statistical analyses.
+
+
+### b)
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+
+
+```
 
 
 

@@ -369,6 +369,37 @@ When multiple people work on the same file, errors may occur if they
 modify the same part.</p>
 </div>
 </div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise 2</h2>
+<p>Here is the link to my GitHub repository: <a href="https://github.com/z-x156/exeRcise-sheet-3" class="uri">https://github.com/z-x156/exeRcise-sheet-3</a></p>
+</div>
+<div id="exercise-3" class="section level2">
+<h2>Exercise 3</h2>
+<div id="a" class="section level3">
+<h3>a)</h3>
+<pre class="r"><code>library(tidyverse)
+library(readr)
+library(dplyr)
+
+pixar &lt;- readr::read_csv(&quot;D:/Sose 25 Software R 2/Exercise 3/pixar_films.csv&quot;)
+
+pixar_clean &lt;- pixar %&gt;% 
+  filter(!is.na(film))
+
+unique(pixar_clean$film_rating)</code></pre>
+<pre><code>## [1] &quot;G&quot;   &quot;PG&quot;  &quot;N/A&quot;</code></pre>
+<pre class="r"><code>pixar_clean &lt;- pixar_clean %&gt;%
+  mutate(film_rating_factor = factor(film_rating))
+
+view(pixar_clean)</code></pre>
+<p>Because film_rating is a categorical variable, converting it into a
+factor allows it to be correctly handled in subsequent visualizations or
+statistical analyses.</p>
+</div>
+<div id="b" class="section level3">
+<h3>b)</h3>
+</div>
+</div>
 
 
 
