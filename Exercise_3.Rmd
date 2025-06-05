@@ -52,10 +52,77 @@ Because film_rating is a categorical variable, converting it into a factor allow
 
 ### b)
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
+str(pixar_clean)
 
+pixar_clean <- pixar_clean %>%
+  mutate(franchise = case_when(
+    str_detect(film, "Toy Story") ~ "Toy Story",
+    str_detect(film, "Cars") ~ "Cars",
+    str_detect(film, "Finding") ~ "Finding",
+    str_detect(film, "Incredibles") ~ "Incredibles",
+    TRUE ~ "Other"
+  ))
 
+franchise_counts <- pixar_clean %>%
+  group_by(franchise) %>%
+  summarise(n = n())
+
+library(ggplot2)
+
+ggplot(franchise_counts, aes(x = reorder(franchise, n), y = n)) +
+  geom_col(fill = "blue") +
+  coord_flip() +
+  labs(
+    title = "Anzahl der Filme pro Franchise",
+    x = "Franchise",
+    y = "Filmanzahl"
+  )
 
 ```
+### c)
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+pixar <- read_csv("D:/Sose 25 Software R 2/Exercise 3/pixar_films.csv")
+public_response <- read_csv("D:/Sose 25 Software R 2/Exercise 3/public_response.csv")
+
+pixar_clean <- pixar %>%
+  filter(!is.na(film))
+
+merged_data <- left_join(pixar_clean, public_response, by = "film")
+
+nrow(pixar_clean)
+nrow(merged_data)
+
+colnames(merged_data)
+
+unmatched <- merged_data %>%
+  filter(is.na(metacritic))
+
+nrow(unmatched)
+unmatched$film
+
+```
+
+We merged "pixar_films" with "public_response" using a left join on the film column. After the join, we checked for rows where variables like "metacritic" are missing.  
+This indicates that some films did not have matching records in "public_response",  and they were possibly due to missing data or differences in film titles.
+
+
+### d)
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+plot_data <- merged_data %>%
+  filter(!is.na(metacritic), !is.na(critics_choice))
+
+view(plot_data)
+ggplot(plot_data, aes(x = metacritic, y = critics_choice)) +
+  geom_point(color = "green", size = 2) +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  labs(
+    title = "Relationship between Metacritic and Critics' Choice",
+    x = "Metacritic",
+    y = "Critics' Choice"
+  )
+```
+
+
 
 
 
