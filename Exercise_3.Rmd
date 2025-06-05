@@ -1,0 +1,26 @@
+---
+title: "Exercise_3"
+author: "Xinyuan Zhuang(12541600)"
+date: "2025-06-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exercise 1
+
+### d)
+Advantages:
+   1)  It allows you to restore previous versions when errors occur.
+   2) It is suitable for collaborative work; each person can complete their part and then merge the results.
+
+Disadvantages:
+   1) The commands are complex and prone to errors.
+   2) When multiple people work on the same file, errors may occur if they modify the same part.
+   
+
+
+
+
